@@ -21,12 +21,18 @@
     <ClInclude Include="Monitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KeyboardMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Monitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,7 +7,6 @@ Monitor::Monitor(void)
 {
 }
 
-
 Monitor::~Monitor(void)
 {
 }
