@@ -65,11 +65,15 @@
     <ClInclude Include="BaseEvent.h" />
     <ClInclude Include="KeyboardMonitor.h" />
     <ClInclude Include="Monitor.h" />
+    <ClInclude Include="ProcessMonitor.h" />
+    <ClInclude Include="ThreadGuard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseEvent.cpp" />
     <ClCompile Include="KeyboardMonitor.cpp" />
     <ClCompile Include="Monitor.cpp" />
+    <ClCompile Include="ProcessMonitor.cpp" />
+    <ClCompile Include="ThreadGuard.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

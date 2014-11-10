@@ -8,6 +8,12 @@ BaseEvent::BaseEvent(void):
 	::GetLocalTime(&m_localTime);
 }
 
+BaseEvent::BaseEvent(const BaseEvent& other)
+{
+	m_type = other.m_type;
+	m_systemTime = other.m_systemTime;
+	m_localTime = other.m_localTime;
+}
 
 BaseEvent::~BaseEvent(void)
 {

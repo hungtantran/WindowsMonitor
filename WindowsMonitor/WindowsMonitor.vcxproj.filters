@@ -24,6 +24,12 @@
     <ClInclude Include="BaseEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessMonitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadGuard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KeyboardMonitor.cpp">
@@ -33,6 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessMonitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadGuard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,6 +12,12 @@ KeyboardEvent::KeyboardEvent(short virtualKeyCode):
 	m_type = EVENT_KEYBOARD;
 }
 
+KeyboardEvent::KeyboardEvent(const KeyboardEvent& other)
+{
+	BaseEvent::BaseEvent(other);
+	m_virtualKeyCode = other.m_virtualKeyCode;
+}
+
 std::string KeyboardEvent::getString(void)
 {
 	switch (m_virtualKeyCode)
@@ -70,30 +76,29 @@ std::string KeyboardEvent::getString(void)
 }
 
 KeyboardMonitor::KeyboardMonitor(void):
-	m_maxListSize(DEFAULT_MAX_LIST_SIZE),
-	m_writeToLog(false),
-	m_logFilePath()
+	Monitor(),
+	m_maxListSize(DEFAULT_MAX_LIST_SIZE)
 {
 }
 
-KeyboardMonitor::KeyboardMonitor(std::string logFilePath):
-	m_maxListSize(DEFAULT_MAX_LIST_SIZE),
-	m_writeToLog(true),
-	m_logFilePath(logFilePath)
+KeyboardMonitor::KeyboardMonitor(const std::string logFilePath):
+	Monitor(logFilePath),
+	m_maxListSize(DEFAULT_MAX_LIST_SIZE)
 {
 }
 
-KeyboardMonitor::KeyboardMonitor(std::string logFilePath, unsigned int maxListSize):
-	m_maxListSize(maxListSize),
-	m_writeToLog(true),
-	m_logFilePath(logFilePath)
+KeyboardMonitor::KeyboardMonitor(const std::string logFilePath, unsigned int maxListSize):
+	Monitor(logFilePath),
+	m_maxListSize(maxListSize)
 {
 }
 
 KeyboardMonitor::~KeyboardMonitor(void)
 {
+	Monitor::~Monitor();
 }
 
+#pragma region Monitor overrides
 void KeyboardMonitor::operator()()
 {
 	int count = 0;
@@ -120,6 +125,7 @@ void KeyboardMonitor::operator()()
 		}
 	}
 }
+#pragma endregion
 
 bool KeyboardMonitor::appendToFile(void)
 {
