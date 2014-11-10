@@ -1,3 +1,7 @@
+#include <iostream>
+#include <memory>
+#include <thread>
+
 #include "KeyboardMonitor.h"
 
 #include "Monitor.h"
@@ -15,5 +19,10 @@ Monitor::~Monitor(void)
 int main(int argc, const char* argv[])
 {
 	KeyboardMonitor keyboardMonitor(DEFAULT_LOG_PATH);
-	keyboardMonitor.StartMonitor();
+	
+	std::thread keyboardMonitorThread(keyboardMonitor);
+
+	std::cout << "Start Monitoring" << std::endl;
+	keyboardMonitorThread.join();
+	std::cout << "End Monitoring" << std::endl;
 }
